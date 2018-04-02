@@ -7,11 +7,10 @@ our @patches = (
     ['word_exists', 'replace', sub {
          require MIME::Base64;
 
-         my $ctx = shift;
-
          my ($self, $word) = @_;
 
          my $pkg = ref($self);
+
          my $bloom = ${"$pkg\::BLOOM_FILTER"};
 
          unless ($bloom) {
@@ -58,8 +57,8 @@ In your F<WordList/Bloom/EN/Foo.pm>:
 
 Then:
 
- use WordList::Mod qw(mod_wordlist);
- my $wl = mod_wordlist("EN::Foo", "Bloom");
+ use WordList::Mod qw(get_mod_wordlist);
+ my $wl = get_mod_wordlist("EN::Foo", "Bloom");
 
  $wl->word_exists("foo"); # uses bloom filter to check for existence.
 
