@@ -11,6 +11,9 @@ our @patches = (
 
          my $pkg = ref($self);
 
+         my $dyn = ${"$pkg\::DYNAMIC"};
+         die "Can't use bloom filter on a dynamic wordlist" if $dyn;
+
          my $bloom = ${"$pkg\::BLOOM_FILTER"};
 
          unless ($bloom) {
